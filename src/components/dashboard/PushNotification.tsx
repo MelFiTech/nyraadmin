@@ -1,4 +1,6 @@
 'use client';
+import React from 'react';
+
 
 import { useState, useEffect } from 'react';
 import { Input } from '@/components/ui/Input';
@@ -272,7 +274,7 @@ export function PushNotification() {
                  (singleUserMethod === 'search' && !selectedUser))
               )
             }
-            className="bg-[#CEFE65] text-[#11140E] py-2 lg:py-1.5 px-4 lg:px-2.5 rounded-md font-bold hover:opacity-90 disabled:opacity-50 min-w-[160px] flex items-center justify-center"
+            className="bg-primary text-dark py-2 lg:py-1.5 px-4 lg:px-2.5 rounded-md font-bold hover:opacity-90 disabled:opacity-50 min-w-[160px] flex items-center justify-center"
           >
             {isLoading ? (
               <>

@@ -1,33 +1,16 @@
 'use client';
+import React from 'react';
+
 
 import { useState } from 'react';
 import { DashboardLayout } from '@/components/layout/DashboardLayout';
 import { useParams, useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
-import { TransactionTable } from '@/components/transactions/TransactionTable';
 import { useAuth } from '@/contexts/AuthContext';
 import { Dialog } from '@/components/ui/Dialog';
 import { useQuery } from '@tanstack/react-query';
 
 const API_BASE_URL = 'https://api.usemelon.co/api/v1';
-
-interface ApiUser {
-  created_at: string;
-  updated_at: string;
-  user_id: string;
-  email: string;
-  phone_number: string;
-  firstname: string;
-  lastname: string;
-  role: string;
-  active_status: string;
-}
-
-interface UserTransactions {
-  total: number;
-  credit: number;
-  debit: number;
-}
 
 interface User {
   id: string;
@@ -45,6 +28,12 @@ interface User {
   transactions: UserTransactions;
 }
 
+interface UserTransactions {
+  total: number;
+  credit: number;
+  debit: number;
+}
+
 interface ApiTransaction {
   created_at: string;
   transaction_id: string;
@@ -57,7 +46,15 @@ interface ApiTransaction {
   amount: string;
   payment_provider: string;
   charge: string;
-  meta: any;
+  meta: TransactionMeta;
+}
+
+interface TransactionMeta {
+  beneficiary?: {
+    account_name: string;
+    account_number: string;
+  };
+  [key: string]: unknown;
 }
 
 export default function UserDetailPage() {

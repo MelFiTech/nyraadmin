@@ -1,3 +1,4 @@
+import React from 'react';
 export const Sidebar = () => {
     return (
       <aside className="w-64 bg-white h-screen shadow-sm">

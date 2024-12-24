@@ -1,4 +1,6 @@
 'use client';
+import React from 'react';
+
 
 import {
   Table,
@@ -8,7 +10,6 @@ import {
   TableRow,
   TableCell,
 } from '@/components/ui/Table';
-import { useRouter } from 'next/navigation';
 
 interface Transaction {
   transaction_id: string;
@@ -25,8 +26,6 @@ interface TransactionTableProps {
 }
 
 export function TransactionTable({ transactions, onTransactionClick }: TransactionTableProps) {
-  const router = useRouter();
-
   const handleRowClick = (transaction: Transaction) => {
     if (onTransactionClick) {
       onTransactionClick(transaction);

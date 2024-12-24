@@ -1,9 +1,10 @@
+import React from 'react';
 import { cn } from '@/lib/utils';
 import { ArrowUpIcon, ArrowDownIcon } from 'lucide-react';
 
 interface StatsCardProps {
   title: string;
-  value: string | number;
+  value: React.ReactNode;
   description?: React.ReactNode;
   type?: 'default' | 'wallet' | 'fees' | 'airtime' | 'usd';
   change?: number;

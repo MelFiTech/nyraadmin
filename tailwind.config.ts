@@ -15,6 +15,7 @@ const config: Config = {
         },
         yellow: {
           400: '#FFD43B',
+          500: '#CEFE65',
         },
       },
     },

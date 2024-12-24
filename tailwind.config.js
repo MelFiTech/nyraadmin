@@ -16,7 +16,7 @@ module.exports = {
   		},
   		colors: {
   			primary: {
-  				DEFAULT: 'hsl(var(--primary))',
+  				DEFAULT: '#CEFE65',
   				foreground: 'hsl(var(--primary-foreground))'
   			},
   			dark: '#11140E',

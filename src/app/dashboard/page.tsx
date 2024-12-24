@@ -1,4 +1,6 @@
 'use client';
+import React from 'react';
+
 
 import { Overview } from '@/components/dashboard/Overview';
 import { DashboardLayout } from '@/components/layout/DashboardLayout';

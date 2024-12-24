@@ -1,8 +1,10 @@
 'use client';
+import React from 'react';
+
 
 import { useState, useRef, useEffect } from 'react';
 import { Modal } from '@/components/ui/Modal';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import html2canvas from 'html2canvas';
 import { useAuth } from '@/contexts/AuthContext';
 import dynamic from 'next/dynamic';
@@ -61,9 +63,10 @@ const EvacuateModalComponent = ({ isOpen, onClose }: { isOpen: boolean; onClose:
       } else {
         setError(data.error || 'Failed to evacuate funds');
       }
-    } catch (error: any) {
+    } catch (error) {
       console.error('Evacuation failed:', error);
-      setError(error.response?.data?.error || error.message || 'Failed to evacuate funds');
+      const axiosError = error as AxiosError<{error: string}>;
+      setError(axiosError.response?.data?.error || axiosError.message || 'Failed to evacuate funds');
     } finally {
       setIsLoading(false);
     }
@@ -131,7 +134,7 @@ const EvacuateModalComponent = ({ isOpen, onClose }: { isOpen: boolean; onClose:
               <button
                 onClick={handleEvacuate}
                 disabled={!selectedWallet || isLoading}
-                className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/80 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 bg-primary text-dark font-bold rounded-md hover:bg-primary/80 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isLoading ? 'Processing...' : 'Evacuate Funds'}
               </button>
@@ -179,7 +182,7 @@ const EvacuateModalComponent = ({ isOpen, onClose }: { isOpen: boolean; onClose:
             <div className="flex justify-end space-x-3">
               <button
                 onClick={handleDownloadScreenshot}
-                className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/80"
+                className="px-4 py-2 bg-primary text-dark font-bold rounded-md hover:bg-primary/80"
               >
                 Download Report
               </button>

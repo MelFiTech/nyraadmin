@@ -1,4 +1,6 @@
 'use client';
+import React from 'react';
+
 
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
@@ -60,7 +62,7 @@ export default function WalletsPage() {
         if (response.data.success) {
           setWallets(response.data.data);
         }
-      } catch (error) {
+      } catch {
         toast.error('Failed to fetch data');
       } finally {
         setIsLoading(false);

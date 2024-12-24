@@ -1,10 +1,10 @@
 'use client';
+import React from 'react';
 
 import { StatsCard } from './StatsCard';
 import { QuickActionCard } from './QuickActionCard';
 import { useRouter } from 'next/navigation';
 import { Input } from '@/components/ui/Input';
-import { Textarea } from '@/components/ui/textarea';
 import { useState, Suspense } from 'react';
 import { EvacuateModal } from './EvacuateModal';
 import { CreditWalletModal } from './CreditWalletModal';
@@ -12,7 +12,6 @@ import { FundTransferModal } from './FundTransferModal';
 
 export const Overview = () => {
   const router = useRouter();
-  const [selectedUserType, setSelectedUserType] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [filter, setFilter] = useState('all');
   const [isEvacuateModalOpen, setIsEvacuateModalOpen] = useState(false);

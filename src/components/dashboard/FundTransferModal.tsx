@@ -1,9 +1,11 @@
 'use client';
+import React from 'react';
+
 
 import { useState, useEffect } from 'react';
 import { Modal } from '@/components/ui/Modal';
 import { Input } from '@/components/ui/Input';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useAuth } from '@/contexts/AuthContext';
 import { toast } from 'sonner';
 
@@ -22,7 +24,12 @@ interface User {
 interface TransferResponse {
   success: boolean;
   message: string;
-  data?: any;
+  data?: {
+    transaction_id: string;
+    amount: number;
+    description: string;
+    status: string;
+  };
 }
 
 export const FundTransferModal = ({ isOpen, onClose }: FundTransferModalProps) => {
@@ -112,9 +119,10 @@ export const FundTransferModal = ({ isOpen, onClose }: FundTransferModalProps) =
       } else {
         toast.error(response.data.message || 'Failed to transfer funds');
       }
-    } catch (error: any) {
+    } catch (error) {
       console.error('Transfer failed:', error);
-      toast.error(error?.response?.data?.message || error?.message || 'Failed to transfer funds');
+      const axiosError = error as AxiosError<{message: string}>;
+      toast.error(axiosError.response?.data?.message || axiosError.message || 'Failed to transfer funds');
     } finally {
       setIsLoading(false);
     }
@@ -211,7 +219,7 @@ export const FundTransferModal = ({ isOpen, onClose }: FundTransferModalProps) =
           <button
             onClick={handleTransfer}
             disabled={!selectedUser || !amount || !description || isLoading}
-            className="w-full px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="w-full px-4 py-2 bg-primary text-dark font-bold rounded-md hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             {isLoading ? 'Processing...' : 'Transfer Funds'}
           </button>

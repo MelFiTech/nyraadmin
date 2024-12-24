@@ -1,3 +1,4 @@
+import React from 'react';
 import { Red_Hat_Display } from 'next/font/google';
 import type { Metadata } from "next";
 import "./globals.css";

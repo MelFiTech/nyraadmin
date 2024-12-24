@@ -1,14 +1,10 @@
-import { Metadata } from 'next';
+'use client';
+import { ReactNode } from 'react';
 
-export const metadata: Metadata = {
-  title: 'Dashboard | NyraWallet Admin',
-  description: 'NyraWallet admin dashboard overview',
-};
+interface LayoutProps {
+  children: ReactNode;
+}
 
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function Layout({ children }: LayoutProps) {
   return children;
 }

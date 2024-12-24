@@ -1,4 +1,6 @@
 'use client';
+import React from 'react';
+
 
 import {
   Table,
@@ -128,7 +130,7 @@ export function UserTable({
     fetchUsers();
   }, [token, searchQuery, filter]);
 
-  const handlePageChange = (newPage: number) => {
+  const handlePageChange = () => {
     console.log('Pagination not implemented');
   };
 
@@ -212,14 +214,14 @@ export function UserTable({
         <div className="flex gap-2 lg:gap-1.5">
           <button 
             className="px-3 py-1 lg:px-2 lg:py-0.5 border rounded text-sm lg:text-xs font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50"
-            onClick={() => handlePageChange(pagination.currentPage - 1)}
+            onClick={() => handlePageChange()}
             disabled={pagination.currentPage === 1}
           >
             Previous
           </button>
           <button 
             className="px-3 py-1 lg:px-2 lg:py-0.5 border rounded text-sm lg:text-xs font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50"
-            onClick={() => handlePageChange(pagination.currentPage + 1)}
+            onClick={() => handlePageChange()}
             disabled={pagination.currentPage === pagination.totalPages}
           >
             Next

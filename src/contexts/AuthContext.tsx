@@ -1,11 +1,25 @@
 'use client';
+import React from 'react';
+
 
 import { createContext, useContext, useEffect, useState } from 'react';
 
 const API_BASE_URL = 'https://api.usemelon.co/api/v1';
 
+interface User {
+  user_id: string;
+  firstname: string;
+  lastname: string;
+  email: string;
+  phone_number: string;
+  active_status: string;
+  created_at: string;
+  role: string;
+  id: string;
+}
+
 interface AuthContextType {
-  user: any | null;
+  user: User | null;
   token: string | null;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
@@ -15,7 +29,7 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<any | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(() => {
     // Initialize from localStorage during mount
     if (typeof window !== 'undefined') {

@@ -1,4 +1,6 @@
 'use client';
+import React from 'react';
+
 
 import { useState } from 'react';
 import { Input } from '@/components/ui/Input';
@@ -23,7 +25,7 @@ export default function Home() {
     try {
       await login(email, password);
       router.push('/dashboard');
-    } catch (err) {
+    } catch {
       setError('Invalid email or password');
     } finally {
       setIsLoading(false);

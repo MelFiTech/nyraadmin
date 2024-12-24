@@ -1,4 +1,6 @@
 'use client';
+import React from 'react';
+
 
 import { useState, useEffect } from 'react';
 import { Modal } from '@/components/ui/Modal';
@@ -20,7 +22,7 @@ interface Bank {
 interface CreditWalletResponse {
   success: boolean;
   message: string;
-  data?: any;
+  data?: Record<string, unknown>;
 }
 
 export const CreditWalletModal = ({ isOpen, onClose }: CreditWalletModalProps) => {
@@ -114,9 +116,10 @@ export const CreditWalletModal = ({ isOpen, onClose }: CreditWalletModalProps) =
       } else {
         toast.error(data?.message || 'Failed to credit wallet');
       }
-    } catch (error: any) {
+    } catch (error: Error | unknown) {
       console.error('Credit failed:', error);
-      toast.error(error?.response?.data?.message || error?.message || 'Failed to credit wallet');
+      const err = error as { response?: { data?: { message: string } }, message?: string };
+      toast.error(err?.response?.data?.message || err?.message || 'Failed to credit wallet');
     } finally {
       setIsLoading(false);
     }
@@ -213,7 +216,7 @@ export const CreditWalletModal = ({ isOpen, onClose }: CreditWalletModalProps) =
           <button
             onClick={handleCredit}
             disabled={!accountNumber || !password || !bankCode || !amount || isLoading}
-            className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="px-4 py-2 bg-primary text-dark font-bold rounded-md hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             {isLoading ? 'Processing...' : 'Credit Wallet'}
           </button>
