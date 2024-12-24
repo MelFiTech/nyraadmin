@@ -12,8 +12,8 @@ const redHat = Red_Hat_Display({
 });
 
 export const metadata: Metadata = {
-  title: "ManiPedi Admin",
-  description: "Admin dashboard for ManiPedi",
+  title: "Nyra Admin",
+  description: "Admin dashboard for Nyra wallet",
 };
 
 export default function RootLayout({
