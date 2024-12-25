@@ -19,7 +19,7 @@ interface User {
 
 export function PushNotification() {
   const { token } = useAuth();
-  const [selectedUserType, setSelectedUserType] = useState('all');
+  const [selectedUserType, setSelectedUserType] = useState('ALL_USERS');
   const [singleUserMethod, setSingleUserMethod] = useState('email'); // 'email' or 'search'
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
@@ -81,17 +81,21 @@ export function PushNotification() {
     showToast.loading('Sending notification...');
 
     try {
-      const endpoint = selectedUserType === 'single'
+      const endpoint = selectedUserType === 'SINGLE_USER'
         ? `${API_BASE_URL}/notifications/admin/user/send-push`
         : `${API_BASE_URL}/notifications/admin/send-push`;
 
-      const payload = selectedUserType === 'single'
+      const payload = selectedUserType === 'SINGLE_USER'
         ? { 
             email: singleUserMethod === 'email' ? userEmail : selectedUser?.email,
             title,
             body
           }
-        : { title, body };
+        : { 
+            users_type: selectedUserType,
+            title, 
+            body 
+          };
 
       const response = await fetch(endpoint, {
         method: 'POST',
@@ -136,12 +140,13 @@ export function PushNotification() {
             value={selectedUserType}
             onChange={(e) => setSelectedUserType(e.target.value)}
           >
-            <option value="all">All users</option>
-            <option value="single">Single user</option>
+            <option value="ALL_USERS">All users</option>
+            <option value="NEW_USERS">New users</option>
+            <option value="SINGLE_USER">Single user</option>
           </select>
         </div>
 
-        {selectedUserType === 'single' && (
+        {selectedUserType === 'SINGLE_USER' && (
           <div className="space-y-4">
             <div className="bg-gray-50 p-4 rounded-lg">
               <div className="flex gap-4">
@@ -269,7 +274,7 @@ export function PushNotification() {
             type="submit"
             disabled={
               isLoading || 
-              (selectedUserType === 'single' && 
+              (selectedUserType === 'SINGLE_USER' && 
                 ((singleUserMethod === 'email' && !userEmail) || 
                  (singleUserMethod === 'search' && !selectedUser))
               )

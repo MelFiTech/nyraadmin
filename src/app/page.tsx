@@ -33,28 +33,17 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-primary flex flex-col lg:flex-row">
-      {/* Left Section */}
-      <div className="py-8 px-6 lg:flex-1 lg:flex lg:flex-col lg:justify-center lg:px-24">
-      </div>
-
-      {/* Right Section */}
-      <div className="flex-1 flex items-center justify-center relative px-4 py-8 lg:py-0">
-        <div className="absolute top-4 right-4 hidden lg:block">
-          <span className="text-dark text-sm">Having trouble? </span>
-          <Link href="/help" className="text-sm text-dark font-medium hover:text-gray-700 underline">
-            Get help →
-          </Link>
-        </div>
-
-        <div className="bg-white rounded-lg p-6 lg:p-8 w-full max-w-md">
-          <h1 className="text-2xl font-bold text-gray-900 mb-1">Welcome back, Admin!</h1>
-          <p className="text-sm text-gray-600 mb-6">
+    <div className="min-h-screen bg-primary flex flex-col">
+      {/* Main Content */}
+      <div className="flex-1 flex items-center justify-center px-4 py-8 w-full">
+        <div className="bg-white rounded-lg p-6 w-full max-w-[90%] sm:max-w-md mx-auto shadow-lg">
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1">Welcome back, Admin!</h1>
+          <p className="text-xs sm:text-sm text-gray-600 mb-6">
             Not an admin? Nice try, buddy! 😉
           </p>
 
           {error && (
-            <p className="text-sm text-red-600 mb-4">{error}</p>
+            <p className="text-xs sm:text-sm text-red-600 mb-4">{error}</p>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -67,6 +56,7 @@ export default function Home() {
               onChange={(e) => setEmail(e.target.value)}
               required
               fullWidth
+              className="text-sm sm:text-base"
             />
 
             <Input
@@ -78,27 +68,28 @@ export default function Home() {
               onChange={(e) => setPassword(e.target.value)}
               required
               fullWidth
+              className="text-sm sm:text-base"
             />
 
             <Button 
               type="submit" 
               variant="primary" 
               size="lg" 
-              className="w-full bg-primary hover:bg-primary/90 text-dark"
+              className="w-full bg-primary hover:bg-primary/90 text-dark text-sm sm:text-base py-3"
               disabled={isLoading}
             >
               {isLoading ? 'Logging in...' : 'Log in'}
             </Button>
           </form>
         </div>
+      </div>
 
-        {/* Help link for mobile */}
-        <div className="absolute bottom-4 left-0 right-0 text-center lg:hidden">
-          <span className="text-dark text-sm">Having trouble? </span>
-          <Link href="/help" className="text-sm text-dark font-medium hover:text-gray-700 underline">
-            Get help →
-          </Link>
-        </div>
+      {/* Help Link - Fixed at bottom */}
+      <div className="fixed bottom-4 left-0 right-0 text-center bg-transparent">
+        <span className="text-dark text-xs sm:text-sm">Having trouble? </span>
+        <Link href="/help" className="text-xs sm:text-sm text-dark font-medium hover:text-gray-700 underline">
+          Get help →
+        </Link>
       </div>
     </div>
   );

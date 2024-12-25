@@ -19,10 +19,10 @@ export const Overview = () => {
   const [isTransferModalOpen, setIsTransferModalOpen] = useState(false);
 
   return (
-    <div className="space-y-6 lg:space-y-3.5">
-      <div className="mb-[54px]">
-        <h2 className="text-xl lg:text-lg font-medium text-gray-900 mb-6 lg:mb-3.5">Quick Actions</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-2.5">
+    <div className="space-y-4 p-4 md:space-y-6 md:p-6">
+      <div className="mb-6 md:mb-[54px]">
+        <h2 className="text-lg font-medium text-gray-900 mb-4 md:text-xl md:mb-6">Quick Actions</h2>
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 md:gap-4">
           <QuickActionCard
             title="Manage Users"
             description="View and manage user accounts"
@@ -80,11 +80,11 @@ export const Overview = () => {
         </div>
       </div>
 
-      <div className="flex items-center justify-between mb-6 lg:mb-3.5">
-        <h2 className="text-2xl lg:text-xl font-medium text-dark">Overview</h2>
-        <div className="flex items-center gap-4 lg:gap-2.5">
+      <div className="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0 mb-4 md:mb-6">
+        <h2 className="text-xl font-medium text-dark md:text-2xl">Overview</h2>
+        <div className="flex flex-col space-y-2 md:flex-row md:items-center md:space-y-0 md:space-x-4">
           <select
-            className="rounded-md border border-gray-300 p-2 lg:p-1.5"
+            className="rounded-md border border-gray-300 p-2 w-full md:w-auto"
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
           >
@@ -98,12 +98,12 @@ export const Overview = () => {
             placeholder="Search..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-64 lg:w-40"
+            className="w-full md:w-64"
           />
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-2.5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
         <StatsCard title="Total Wallet Balance" value="₦0" type="wallet" />
         <StatsCard title="Total Fees" value="₦0" type="fees" />
         <StatsCard title="Airtime to Cash" value="₦0" type="airtime" />
@@ -114,16 +114,16 @@ export const Overview = () => {
         <StatsCard title="Failed Transactions" value="0" />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-3.5">
-        <div className="bg-white p-6 lg:p-3.5 rounded-lg shadow-sm">
-          <h2 className="text-xl lg:text-lg font-bold text-gray-900 mb-6 lg:mb-3.5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+        <div className="bg-white p-4 md:p-6 rounded-lg shadow-sm">
+          <h2 className="text-lg font-bold text-gray-900 mb-4 md:text-xl md:mb-6">
             Service Availability
           </h2>
           
-          <div className="space-y-6 lg:space-y-4">
-            <div className="p-4 lg:p-3 bg-gray-50 rounded-lg">
+          <div className="space-y-4 md:space-y-6">
+            <div className="p-3 md:p-4 bg-gray-50 rounded-lg">
               <div className="flex items-center justify-between">
-                <span className="text-dark font-medium text-base lg:text-sm">Transfers</span>
+                <span className="text-dark font-medium text-sm md:text-base">Transfers</span>
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input type="checkbox" className="sr-only peer" defaultChecked />
                   <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#11140E]"></div>
@@ -131,9 +131,9 @@ export const Overview = () => {
               </div>
             </div>
 
-            <div className="p-4 lg:p-3 bg-gray-50 rounded-lg">
+            <div className="p-3 md:p-4 bg-gray-50 rounded-lg">
               <div className="flex items-center justify-between">
-                <span className="text-dark font-medium text-base lg:text-sm">Airtime to Cash</span>
+                <span className="text-dark font-medium text-sm md:text-base">Airtime to Cash</span>
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input type="checkbox" className="sr-only peer" defaultChecked />
                   <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#11140E]"></div>
@@ -141,9 +141,9 @@ export const Overview = () => {
               </div>
             </div>
 
-            <div className="p-4 lg:p-3 bg-gray-50 rounded-lg">
+            <div className="p-3 md:p-4 bg-gray-50 rounded-lg">
               <div className="flex items-center justify-between">
-                <span className="text-dark font-medium text-base lg:text-sm">Airtime Purchase</span>
+                <span className="text-dark font-medium text-sm md:text-base">Airtime Purchase</span>
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input type="checkbox" className="sr-only peer" defaultChecked />
                   <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#11140E]"></div>
@@ -151,9 +151,9 @@ export const Overview = () => {
               </div>
             </div>
 
-            <div className="p-4 lg:p-3 bg-gray-50 rounded-lg">
+            <div className="p-3 md:p-4 bg-gray-50 rounded-lg">
               <div className="flex items-center justify-between">
-                <span className="text-dark font-medium text-base lg:text-sm">USD Card Creation</span>
+                <span className="text-dark font-medium text-sm md:text-base">USD Card Creation</span>
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input type="checkbox" className="sr-only peer" defaultChecked />
                   <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#11140E]"></div>
@@ -161,9 +161,9 @@ export const Overview = () => {
               </div>
             </div>
 
-            <div className="p-4 lg:p-3 bg-gray-50 rounded-lg">
+            <div className="p-3 md:p-4 bg-gray-50 rounded-lg">
               <div className="flex items-center justify-between">
-                <span className="text-dark font-medium text-base lg:text-sm">Data Purchase</span>
+                <span className="text-dark font-medium text-sm md:text-base">Data Purchase</span>
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input type="checkbox" className="sr-only peer" defaultChecked />
                   <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#11140E]"></div>
@@ -173,12 +173,12 @@ export const Overview = () => {
           </div>
         </div>
 
-        <div className="bg-white p-6 lg:p-3.5 rounded-lg shadow-sm">
-          <h2 className="text-xl lg:text-lg font-bold text-gray-900 mb-6 lg:mb-3.5">
+        <div className="bg-white p-4 md:p-6 rounded-lg shadow-sm">
+          <h2 className="text-lg font-bold text-gray-900 mb-4 md:text-xl md:mb-6">
             Admin Actions
           </h2>
           
-          <div className="space-y-6 lg:space-y-4">
+          <div className="space-y-4 md:space-y-6">
           </div>
         </div>
       </div>
