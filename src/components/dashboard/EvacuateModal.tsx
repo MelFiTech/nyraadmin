@@ -59,7 +59,20 @@ const EvacuateModalComponent = ({ isOpen, onClose }: { isOpen: boolean; onClose:
       );
 
       if (data.success) {
-        setResponse(data.data);
+        // Handle string response
+        if (typeof data.data === 'string') {
+          setResponse({
+            message: data.data,
+            total_accounts_processed: 0,
+            total_failures: 0,
+            total_amount_moved: 0,
+            total_charges_incured: 0,
+            skipped: 0,
+            amount_skipped: 0
+          });
+        } else {
+          setResponse(data.data);
+        }
       } else {
         setError(data.error || 'Failed to evacuate funds');
       }
@@ -145,32 +158,37 @@ const EvacuateModalComponent = ({ isOpen, onClose }: { isOpen: boolean; onClose:
             <div ref={responseRef} className="space-y-6">
               <div className="bg-olive-10 p-6 rounded-lg space-y-3">
                 <h3 className="text-lg font-semibold text-dark mb-4">Evacuation Results</h3>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <p className="text-sm text-gray-600">Total Accounts Processed</p>
-                    <p className="text-lg font-medium text-dark">{response.total_accounts_processed}</p>
+                
+                {response.message ? (
+                  <p className="text-lg font-medium text-dark">{response.message}</p>
+                ) : (
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-sm text-gray-600">Total Accounts Processed</p>
+                      <p className="text-lg font-medium text-dark">{response.total_accounts_processed?.toLocaleString() || '0'}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600">Total Failures</p>
+                      <p className="text-lg font-medium text-dark">{response.total_failures?.toLocaleString() || '0'}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600">Total Amount Moved</p>
+                      <p className="text-lg font-medium text-dark">₦{response.total_amount_moved?.toLocaleString() || '0'}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600">Total Charges Incurred</p>
+                      <p className="text-lg font-medium text-dark">₦{response.total_charges_incured?.toLocaleString() || '0'}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600">Skipped Transactions</p>
+                      <p className="text-lg font-medium text-dark">{response.skipped?.toLocaleString() || '0'}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600">Amount Skipped</p>
+                      <p className="text-lg font-medium text-dark">₦{response.amount_skipped?.toLocaleString() || '0'}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-sm text-gray-600">Total Failures</p>
-                    <p className="text-lg font-medium text-dark">{response.total_failures}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-600">Total Amount Moved</p>
-                    <p className="text-lg font-medium text-dark">₦{response.total_amount_moved.toLocaleString()}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-600">Total Charges Incurred</p>
-                    <p className="text-lg font-medium text-dark">₦{response.total_charges_incured.toLocaleString()}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-600">Skipped Transactions</p>
-                    <p className="text-lg font-medium text-dark">{response.skipped}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-600">Amount Skipped</p>
-                    <p className="text-lg font-medium text-dark">₦{response.amount_skipped.toLocaleString()}</p>
-                  </div>
-                </div>
+                )}
               </div>
 
               <div className="bg-olive-10 p-6 rounded-lg">
@@ -201,10 +219,11 @@ export const EvacuateModal = dynamic(() => Promise.resolve(EvacuateModalComponen
 
 // Type definitions
 interface EvacuationResponse {
-  total_accounts_processed: number;
-  total_failures: number;
-  total_amount_moved: number;
-  total_charges_incured: number;
-  skipped: number;
-  amount_skipped: number;
+  total_accounts_processed?: number;
+  total_failures?: number;
+  total_amount_moved?: number;
+  total_charges_incured?: number;
+  skipped?: number;
+  amount_skipped?: number;
+  message?: string;
 }

@@ -9,6 +9,7 @@ import { useState, Suspense } from 'react';
 import { EvacuateModal } from './EvacuateModal';
 import { CreditWalletModal } from './CreditWalletModal';
 import { FundTransferModal } from './FundTransferModal';
+import { DebitWalletModal } from './DebitWalletModal';
 
 export const Overview = () => {
   const router = useRouter();
@@ -17,6 +18,11 @@ export const Overview = () => {
   const [isEvacuateModalOpen, setIsEvacuateModalOpen] = useState(false);
   const [isCreditModalOpen, setIsCreditModalOpen] = useState(false);
   const [isTransferModalOpen, setIsTransferModalOpen] = useState(false);
+  const [isDebitModalOpen, setIsDebitModalOpen] = useState(false);
+
+  const handleDebitClick = () => {
+    setIsDebitModalOpen(true);
+  };
 
   return (
     <div className="space-y-4 p-4 md:space-y-6 md:p-6">
@@ -75,6 +81,12 @@ export const Overview = () => {
             title="Fund Transfer"
             description="Transfer funds between wallets"
             onClick={() => setIsTransferModalOpen(true)}
+            className="bg-rose-50 hover:bg-rose-100"
+          />
+          <QuickActionCard
+            title="Debit Wallet"
+            description="Debit user wallets"
+            onClick={handleDebitClick}
             className="bg-rose-50 hover:bg-rose-100"
           />
         </div>
@@ -195,6 +207,14 @@ export const Overview = () => {
         <FundTransferModal 
           isOpen={isTransferModalOpen}
           onClose={() => setIsTransferModalOpen(false)}
+        />
+        <DebitWalletModal
+          isOpen={isDebitModalOpen}
+          onClose={() => setIsDebitModalOpen(false)}
+          onSuccess={() => {
+            setIsDebitModalOpen(false);
+            window.location.reload();
+          }}
         />
       </Suspense>
     </div>

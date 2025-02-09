@@ -30,7 +30,7 @@ interface UserListResponse {
   data: User[];
 }
 
-const API_BASE_URL = 'https://api.usemelon.co/api/v1';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function UsersPage() {
   const [searchQuery, setSearchQuery] = useState('');

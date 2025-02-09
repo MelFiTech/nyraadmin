@@ -20,6 +20,12 @@ const nextConfig = {
         };
 
         return config;
+    },
+    experimental: {
+        // Enable client component features
+        serverActions: {
+            enabled: true
+        }
     }
 };
 

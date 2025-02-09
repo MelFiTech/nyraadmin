@@ -1,10 +1,11 @@
 'use client';
-import { ReactNode } from 'react';
+
+import React from 'react';
 
 interface LayoutProps {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
-export default function Layout({ children }: LayoutProps) {
-  return children;
+export default function DashboardLayout({ children }: LayoutProps) {
+  return <>{children}</>;
 }
